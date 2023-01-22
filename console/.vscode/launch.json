@@ -1,0 +1,90 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${config:dotnet.path}/dotnet",
+            "stopAtEntry": false,
+            "justMyCode": true,
+            "args": [
+                "${config:remote.path}/${workspaceFolderBasename}/${config:dotnet.project}.dll"
+            ],
+            "cwd": "${config:remote.path}/${workspaceFolderBasename}",
+            "pipeTransport": {
+                "pipeCwd": "${workspaceRoot}",
+                "pipeProgram": "ssh",
+                "pipeArgs": [
+                    "-T",
+                    "-q",
+                    "-p",
+                    "${config:remote.port}",
+                    "-o",
+                    "StrictHostKeyChecking=no",
+                    "-o",
+                    "UserKnownHostsFile /dev/null",
+                    "${config:remote.user}@${config:remote.host}"
+                ],
+                "pipeEnv": {
+                    "DOTNET_MODIFIABLE_ASSEMBLIES": "debug",
+                },
+                "debuggerPath": "/usr/share/vsdbg/vsdbg --engineLogging=/var/log/vsdbg.log"
+            },
+            "sourceFileMap": {
+                "${config:remote.user}/${workspaceFolderBasename}/": "${workspaceRoot}"
+            },
+            "logging": {
+                "engineLogging": false,
+                "moduleLoad": false
+            },
+            "env": {
+                "DOTNET_NOLOGO": "true",
+                "DOTNET_ENVIRONMENT": "Development",
+                "DOTNET_CLI_TELEMETRY_OPTOUT": "true",
+                "DOTNET_SKIP_FIRST_TIME_EXPERIENCE": "true"
+            }
+        },
+        {
+            "name": "Release",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "release",
+            "program": "${config:dotnet.path}/dotnet",
+            "stopAtEntry": false,
+            "args": [
+                "${config:remote.path}/${workspaceFolderBasename}/${config:dotnet.project}.dll"
+            ],
+            "cwd": "${config:remote.path}/${workspaceFolderBasename}",
+            "pipeTransport": {
+                "pipeCwd": "${workspaceRoot}",
+                "pipeProgram": "ssh",
+                "pipeArgs": [
+                    "-T",
+                    "-q",
+                    "-p",
+                    "${config:remote.port}",
+                    "-o",
+                    "StrictHostKeyChecking=no",
+                    "-o",
+                    "UserKnownHostsFile /dev/null",
+                    "${config:remote.user}@${config:remote.host}"
+                ],
+                "debuggerPath": "/usr/share/vsdbg/vsdbg --engineLogging=/var/log/vsdbg.log"
+            },
+            "sourceFileMap": {
+                "${config:remote.path}/${workspaceFolderBasename}/": "${workspaceRoot}"
+            },
+            "logging": {
+                "moduleLoad": false
+            },
+            "env": {
+                "DOTNET_NOLOGO": "true",
+                "DOTNET_ENVIRONMENT": "Production",
+                "DOTNET_CLI_TELEMETRY_OPTOUT": "true",
+                "DOTNET_SKIP_FIRST_TIME_EXPERIENCE": "true"
+            }
+        },
+    ],
+}
