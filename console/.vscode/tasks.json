@@ -27,7 +27,7 @@
             "args": [
                 "build",
                 "-r",
-                "linux-arm64",
+                "${config:dotnet.rid}",
                 "${workspaceFolder}/${config:dotnet.project}.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary",
@@ -44,7 +44,7 @@
                 "-c",
                 "Release",
                 "-r",
-                "linux-arm64",
+                "${config:dotnet.rid}",
                 "${workspaceFolder}/${config:dotnet.project}.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary",
@@ -74,7 +74,7 @@
             "command": "scp",
             "args": [
                 "-r",
-                "bin/Debug/${config:dotnet.version}/linux-arm64/*",
+                "bin/Debug/${config:dotnet.version}/${config:dotnet.rid}/*",
                 "${config:remote.user}@${config:remote.host}:\"${config:remote.path}/${workspaceFolderBasename}\""
             ],
             "problemMatcher": [],
@@ -85,7 +85,7 @@
             "command": "scp",
             "args": [
                 "-r",
-                "bin/Release/${config:dotnet.version}/linux-arm64/publish/*",
+                "bin/Release/${config:dotnet.version}/${config:dotnet.rid}/publish/*",
                 "${config:remote.user}@${config:remote.host}:\"${config:remote.path}/${workspaceFolderBasename}\""
             ],
             "problemMatcher": [],

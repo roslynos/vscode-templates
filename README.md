@@ -3,13 +3,13 @@ This repository maintains the c# build template used in conjunction with the [Ro
 
 ## Enable SSH key authentication on RoslynOS device
 ```bash
-# Use ssh-keygen on developemnt workstaton to create our SSH key pair and copy to device
+# Use ssh-keygen on developemnt workstaton to create our SSH key pair and copy to device.
 ssh-keygen
 
-# Update remote device with authorized keys. Replace with set hostname
-cat ~/.ssh/id_rsa.pub | ssh gunshoe@rainier 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
+# Update remote device with authorized keys.
+cat ~/.ssh/id_rsa.pub | ssh gumshoe@rainier 'mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys'
 
-# Secure the device public we transferred to authorized keys
+# Secure the device authorized keys.
 chmod 700 .ssh
 touch .ssh/authorized_keys
 chmod 644 .ssh/authorized_keys
