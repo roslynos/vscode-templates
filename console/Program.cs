@@ -8,13 +8,13 @@ namespace RoslynOS.Template
         {
             var env = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
 
-            Console.WriteLine($"Environment: {env}"); 
-            
-            #if DEBUG
-                Console.WriteLine("Configuration: Debug");
-            #else
-                Console.WriteLine("Configuration: Release");
-            #endif
+            Console.WriteLine($"Environment: {env}");
+
+#if DEBUG
+            Console.WriteLine("Configuration: Debug");
+#else
+            Console.WriteLine("Configuration: Release");
+#endif
         }
     }
 }
